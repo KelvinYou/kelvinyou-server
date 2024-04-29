@@ -8,7 +8,10 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-func All(c *gin.Context) {
+// DemoController ...
+type DemoController struct{}
+
+func (ctrl DemoController) All(c *gin.Context) {
 	// Assuming db is your database instance or a package-level variable.
 	// Retrieve all dummy data of DemoItem from the database
 	items := []models.DemoItem{
@@ -21,7 +24,7 @@ func All(c *gin.Context) {
 	c.JSON(http.StatusOK, items)
 }
 
-func One(c *gin.Context) {
+func (ctrl DemoController) One(c *gin.Context) {
 	// Get the ID from the URL parameter
 	id := c.Param("id")
 

@@ -2,7 +2,6 @@ package main
 
 import (
 	"fmt"
-	"net/http"
 
 	controller "github.com/KelvinYou/kelvinyou-server/controllers"
 
@@ -30,19 +29,25 @@ func CORSMiddleware() gin.HandlerFunc {
 }
 
 func main() {
+	port := "8080"
+
 	// Create a new Gin router
 	r := gin.Default()
 
 	r.Use(CORSMiddleware())
 
-	// Define routes
-	r.GET("/hello", func(c *gin.Context) {
-		c.JSON(http.StatusOK, gin.H{"message": "Hello, World!"})
-	})
+	api := r.Group("/api")
+	{
+		v0 := api.Group("/v0")
+		{
+			demo := new(controller.DemoController)
 
-	r.GET("/demo", controller.All)
-	r.GET("/demo/:id", controller.One)
+			v0.GET("/demo", demo.All)
+			v0.GET("/demo/:id", demo.One)
+
+		}
+	}
 
 	// Start the server
-	r.Run(":8080")
+	r.Run(":" + port)
 }
