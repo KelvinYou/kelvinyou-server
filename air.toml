@@ -1,0 +1,15 @@
+# air.toml
+
+[build]
+bin = "server"
+cmd = "go build -o server"
+
+[run]
+port = 8080
+watch = ["."]
+
+[live_reload]
+enable = true
+port = 8080
+extensions = ["go", "tmpl", "tpl", "html"]
+delay = 1000
