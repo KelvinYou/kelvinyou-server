@@ -4,6 +4,8 @@ import (
 	"fmt"
 	"net/http"
 
+	controller "github.com/KelvinYou/kelvinyou-server/controllers"
+
 	"github.com/gin-gonic/gin"
 )
 
@@ -37,6 +39,9 @@ func main() {
 	r.GET("/hello", func(c *gin.Context) {
 		c.JSON(http.StatusOK, gin.H{"message": "Hello, World!"})
 	})
+
+	r.GET("/demo", controller.All)
+	r.GET("/demo/:id", controller.One)
 
 	// Start the server
 	r.Run(":8080")
